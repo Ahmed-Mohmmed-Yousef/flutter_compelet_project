@@ -7,7 +7,7 @@ import 'package:flutter_complete_project/core/widgets/app_text_button.dart';
 import 'package:flutter_complete_project/core/widgets/app_text_form_field.dart';
 import 'package:flutter_complete_project/features/login/data/models/login_request_body.dart';
 import 'package:flutter_complete_project/features/login/logic/cubit/login_cubit.dart';
-import 'package:flutter_complete_project/features/login/ui/widgets/already_have_account_text.dart';
+import 'package:flutter_complete_project/features/login/ui/widgets/dont_have_account_text.dart';
 import 'package:flutter_complete_project/features/login/ui/widgets/email_and_password_form.dart';
 import 'package:flutter_complete_project/features/login/ui/widgets/login_bloc_listener.dart';
 import 'package:flutter_complete_project/features/login/ui/widgets/terms_and_conditions_text.dart';
@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   verticalSpacing(16),
                   const TermsAndConditionsText(),
                   verticalSpacing(32),
-                  const AlreadyHaveAccountText(),
+                  const DontHaveAccountText(),
                   const LoginBlocListener(),
                 ],
               ),
@@ -78,12 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void _validateTheDoLogin(BuildContext context) {
     final cubit = context.read<LoginCubit>();
     if (cubit.formKey.currentState!.validate()) {
-      cubit.emitLoginState(
-        LoginRequestBody(
-          email: cubit.emailController.text,
-          password: cubit.passwordController.text,
-        ),
-      );
+      cubit.emitLoginState();
     }
   }
 }
